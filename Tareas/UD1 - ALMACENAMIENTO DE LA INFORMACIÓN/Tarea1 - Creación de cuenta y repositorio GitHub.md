@@ -18,8 +18,8 @@
 
 ### ÍNDICE
 
-- [Creación cuenta](#creacion-de-cuenta)
-- [Creación repositorio Github](#creacion-del-repositorio-github)
+- [Creación cuenta](#1.-creacion-de-cuenta)
+- [Creación repositorio Github](#2.-creacion-del-repositorio-github)
 
 ## 
 
