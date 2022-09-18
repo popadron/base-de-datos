@@ -18,8 +18,8 @@
 
 ### ÍNDICE
 
-[1. Creación de cuenta](#1.-creacion-de-cuenta)
-[2. Creación de repositorio de Github](#2.-creacion-del-repositorio-github)
+1. Creación de cuenta
+2. Creación de repositorio de Github
 
 ## 
 
@@ -74,6 +74,8 @@ Una vez finalizado ese proceso te llegará un correo de verificación donde tend
 <p align="center">
   <img src="https://github.com/popadron/base-de-datos/blob/main/Tareas/fotos/UD1/Tarea%201/verifyEmail.PNG?raw=true">
 </p>
+
+##
 
 ### 2. Creación de repositorio de Github
 
