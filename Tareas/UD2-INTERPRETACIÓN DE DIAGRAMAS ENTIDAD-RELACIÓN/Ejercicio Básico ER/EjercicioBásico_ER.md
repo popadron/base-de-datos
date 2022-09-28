@@ -68,7 +68,7 @@ Representa las entidades, relaciones y cardinalidades mínimas y máximas para c
 </p>
 
 ### Ejercicio 6
-* Una empresa está compuesta por varios departamentos de los que se desea almacenar su nº, nombre y localidad. - Los empleados deben estar asignados a un departamento y se guardarán sus datos nºempleado, apellido, salario. Además, cada empleado tiene un jefe.
+* Una empresa está compuesta por varios departamentos de los que se desea almacenar su nº, nombre y localidad. Los empleados deben estar asignados a un departamento y se guardarán sus datos nºempleado, apellido, salario. Además, cada empleado tiene un jefe.
 (Nota: se ha supuesto que un departamento puede no tener empleados)
 
 <p align="center">
@@ -76,7 +76,7 @@ Representa las entidades, relaciones y cardinalidades mínimas y máximas para c
 </p>
 
 ### Ejercicio 7
-* Se desea construir una bd para mantener información sobre los equipos y partidos de la liga. - Un equipo tiene un cierto nº de jugadores (Id_jugador, datos personales) y no todos participan en cada partido. Queremos registrar además por cada partido, qué jugadores juegan, la fecha y la hora del partido, resultados de los encuentros y las posiciones donde juegan.
+* Se desea construir una bd para mantener información sobre los equipos y partidos de la liga. Un equipo tiene un cierto nº de jugadores (Id_jugador, datos personales) y no todos participan en cada partido. Queremos registrar además por cada partido, qué jugadores juegan, la fecha y la hora del partido, resultados de los encuentros y las posiciones donde juegan.
 
 <p align="center">
   <img src="https://github.com/popadron/base-de-datos/blob/main/Tareas/UD2-INTERPRETACI%C3%93N%20DE%20DIAGRAMAS%20ENTIDAD-RELACI%C3%93N/Ejercicio%20B%C3%A1sico%20ER/7equiposJugadores.drawio.png?raw=true">
