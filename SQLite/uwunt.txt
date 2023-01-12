@@ -1,0 +1,44 @@
+CREATE TABLE fabricante(
+	id_fab INTEGER PRIMARY KEY,
+	nombre TEXT,
+	pais TEXT
+);
+
+CREATE TABLE programa(
+	codigo INTEGER PRIMARY KEY,
+	nombre TEXT,
+	version TEXT
+);
+
+CREATE TABLE comercio(
+	cif INTEGER PRIMARY KEY,
+	nombre TEXT,
+	ciudad TEXT
+);
+
+CREATE TABLE cliente(
+	dni INTEGER PRIMARY KEY,
+	nombre TEXT,
+	edad INTEGER
+);
+
+CREATE TABLE desarrolla (
+	id_fab INTEGER,
+	codigo INTEGER,
+	PRIMARY KEY(id_fab, codigo)
+);
+
+CREATE TABLE distribuye (
+	cif INTEGER,
+	codigo INTEGER,
+	cantidad INTEGER,
+	PRIMARY KEY(cif, codigo)
+);
+
+CREATE TABLE registra(
+	cif INTEGER,
+	dni INTEGER,
+	codigo INTEGER,
+	medio TEXT,
+	PRIMARY KEY(cif, dni)
+);
