@@ -341,66 +341,102 @@ SELECT programa.nombre FROM programa, registra
 		and registra.medio='Tarjeta postal';
 
 -- ¿En qué localidades se han vendido productos que se han registrado por Internet?
-SELECT programa.nombre from programa, registra
+SELECT programa.nombre FROM programa, registra
 	WHERE programa.codigo=registra.codigo
 		and registra.medio='Internet';
 
 -- Obtén un listado de los nombres de las personas que se han registrado por Internet, junto al nombre de los programas para los que ha efectuado el registro.
-SELECT cliente.nombre, registra.medio, programa.nombre from cliente, programa, registra
+SELECT cliente.nombre, registra.medio, programa.nombre FROM cliente, programa, registra
 	WHERE cliente.dni=registra.dni
 		and programa.codigo=registra.codigo
 		and registra.medio='Internet';
 
 -- Genera un listado en el que aparezca cada cliente junto al programa que ha registrado, el medio con el que lo ha hecho y el comercio en el que lo ha adquirido.
-SELECT DISTINCT cliente.nombre, programa.nombre, registra.medio, comercio.nombre from cliente, programa, registra, comercio;
+SELECT DISTINCT cliente.nombre, programa.nombre, registra.medio, comercio.nombre FROM cliente, programa, registra, comercio;
 
-Genera un listado con las ciudades en las que se pueden obtener los productos de Oracle.
+-- Genera un listado con las ciudades en las que se pueden obtener los productos de Oracle.
+SELECT DISTINCT comercio.ciudad FROM comercio, distribuye, programa, desarrolla, fabricante
+	WHERE comercio.cif=distribuye.cif
+		and distribuye.codigo = programa.codigo
+		and programa.codigo = desarrolla.codigo
+		and desarrolla.id_fab = fabricante.id_fab
+		and fabricante.nombre = 'Oracle';
 
+-- Obtén el nombre de los usuarios que han registrado Access XP.
+SELECT cliente.nombre FROM cliente, registra, programa
+	WHERE cliente.dni = registra.dni
+		and registra.codigo = programa.codigo 
+		and programa.nombre = 'Access' 
+		and programa.version like  'XP%';
 
-Obtén el nombre de los usuarios que han registrado Access XP.
+-- Nombre de aquellos fabricantes cuyo país es el mismo que ʻOracleʼ. (Subconsulta).
+SELECT nombre FROM fabricante
+	WHERE pais = (SELECT pais FROM fabricante
+					WHERE nombre = 'Oracle');
 
+-- Nombre de aquellos clientes que tienen la misma edad que Pepe Pérez. (Subconsulta).
+SELECT nombre FROM cliente
+	WHERE edad = (SELECT edad FROM cliente
+					WHERE nombre = 'Pepe Pérez');
 
-Nombre de aquellos fabricantes cuyo país es el mismo que ʻOracleʼ. (Subconsulta).
+-- Genera un listado con los comercios que tienen su sede en la misma ciudad que tiene el comercio ʻFNACʼ. (Subconsulta).
+SELECT nombre FROM cliente
+	WHERE edad = (SELECT edad FROM cliente
+					WHERE nombre = 'Pepe Pérez');
 
+-- Nombre de aquellos clientes que han registrado un producto de la misma forma que el cliente ʻPepe Pérezʼ. (Subconsulta).
+SELECT nombre FROM cliente
+	WHERE edad = (SELECT edad FROM cliente
+					WHERE nombre = 'Pepe Pérez');
 
-Nombre de aquellos clientes que tienen la misma edad que Pepe Pérez. (Subconsulta).
+-- Obtener el número de programas que hay en la tabla programas.
+SELECT count(codigo) FROM programa;
 
+--Calcula el número de clientes cuya edad es mayor de 40 años.
+SELECT count(dni) FROM cliente
+	WHERE edad > 40;
 
-Genera un listado con los comercios que tienen su sede en la misma ciudad que tiene el comercio ʻFNACʼ. (Subconsulta).
+-- Calcula el número de productos que ha vendido el establecimiento cuyo CIF es 1.
+SELECT sum(cantidad) FROM distribuye
+	WHERE cif = 1;
 
+-- Calcula la media de programas que se venden cuyo código es 7.
+SELECT avg(cantidad) FROM distribuye as d, programa as p 
+	WHERE  d.codigo = p.codigo
+		and p.codigo = 7;
 
-Nombre de aquellos clientes que han registrado un producto de la misma forma que el cliente ʻPepe Pérezʼ. (Subconsulta).
+-- Calcula la mínima cantidad de programas de código 7 que se ha vendido.
+SELECT MIN(cantidad) FROM distribuye,programa
+	WHERE distribuye.codigo = programa.codigo
+		and programa.codigo = 7;
 
+-- Calcula la máxima cantidad de programas de código 7 que se ha vendido.
+SELECT max(cantidad) FROM distribuye as d,programa as p
+	WHERE d.codigo = p.codigo
+		and p.codigo = 7;
 
-Obtener el número de programas que hay en la tabla programas. 46 Calcula el número de clientes cuya edad es mayor de 40 años.
+-- ¿En cuántos establecimientos se vende el programa cuyo código es 7?
+SELECT count (c.cif) FROM comercio as c,distribuye as d
+	WHERE d.cif = c.cif
+		and d.codigo = 7;
 
+-- Calcular el número de registros que se han realizado por Internet.
+SELECT count(dni) FROM registra 
+	WHERE medio="INTERNET";
 
-Calcula el número de productos que ha vendido el establecimiento cuyo CIF es 1.
+-- Obtener el número total de programas que se han vendido en ʻSevillaʼ.
+SELECT sum(distribuye.cantidad) FROM comercio,distribuye
+	WHERE comercio.cif=distribuye.cif
+		and comercio.ciudad="SEVILLA" ;
 
+-- Calcular el número total de programas que han desarrollado los fabricantes cuyo país es ʻEstados Unidosʼ.
+SELECT count(programa.codigo) FROM fabricante, desarrolla, programa
+	WHERE fabricante.id_fab=desarrolla.id_fab
+		and desarrolla.codigo=programa.codigo
+		and fabricante.pais="Estados Unidos";
 
-Calcula la media de programas que se venden cuyo código es 7.
+-- Visualiza el nombre de todos los clientes en mayúscula. En el resultado de la consulta debe aparecer también la longitud de la cadena nombre.
+SELECT upper(nombre), lenght(nombre) FROM cliente ;
 
-
-Calcula la mínima cantidad de programas de código 7 que se ha vendido.
-
-
-Calcula la máxima cantidad de programas de código 7 que se ha vendido.
-
-
-¿En cuántos establecimientos se vende el programa cuyo código es 7?
-
-
-Calcular el número de registros que se han realizado por Internet.
-
-
-Obtener el número total de programas que se han vendido en ʻSevillaʼ.
-
-
-Calcular el número total de programas que han desarrollado los fabricantes cuyo país es ʻEstados Unidosʼ.
-
-
-Visualiza el nombre de todos los clientes en mayúscula. En el resultado de la consulta debe aparecer también la longitud de la cadena nombre.
-
-
-Con una consulta concatena los campos nombre y versión de la tabla PROGRAMA.
-
+-- Con una consulta concatena los campos nombre y versión de la tabla PROGRAMA.
+SELECT  nombre || version FROM programa ;
