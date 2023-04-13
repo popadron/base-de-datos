@@ -56,6 +56,27 @@ Teniendo en cuenta esta información se pide:
     CALL PROCEDURE datosPersona(92, 'Si', 'M', '2012-02-10 16:43:56');
     CALL PROCEDURE datosPersona(60, 'No', 'H', '2012-01-09 17:15:56');
     CALL PROCEDURE datosPersona(73, 'Si', 'M', '2012-10-08 18:48:56');
+  ```
+  ```sql
+  CORREGIDO:
+  DELIMETER //
+  DROP PROCEDURE introducirPersona IF exists;
+  CREATE PROCEDURE introducirPersona (IN numPersonas INT)
+  BEGIN
+    DECLARE pesoEntrada INT default 55;
+    DECLARE numPersona INT default 0;
+    WHILE numPersonas>0 then
+      IF (numPersona/2) <> 0 then
+
+        INSERT INTO persona VALUES(pesoEntrada, 'Si', 'H', '2012-10-15 15:45:56');
+      ELSE
+
+        INSERT INTO persona VALUES(pesoEntrada, 'Si', 'M', '2012-10-15 15:45:56');
+      end IF;
+      set numPersonas = numPersonas -1;
+      set numPersona = numPersona + 1;
+    end WHILE;
+  END //
 ```
   
 - Realice un procedimiento para determinar si la persona puede donar sangre de acuerdo a las siguientes condiciones:
@@ -64,6 +85,7 @@ Teniendo en cuenta esta información se pide:
   
 ```sql
   DELIMITER //
+  DROP PROCEDURE datosPersonas IF exists;
   CREATE PROCEDURE datosPersonas (IN peso INT UNSIGNED, IN/OUT admitido VARCHAR(2), IN sexo CHAR(1), IN fechaUltimaDonacion DATETIME)
   BEGIN
     INSERT into persona VALUES(peso, admitido, sexo, fechaUltimaDonacion);
@@ -77,6 +99,24 @@ Teniendo en cuenta esta información se pide:
   END //
   
     CALL PROCEDURE datosPersonas();
+```
+```sql
+  CORREGIDO:
+  DELIMITER //
+  DROP PROCEDURE datosPersonas IF exists;
+  CREATE PROCEDURE datosPersonas (IN pesoMin INT UNSIGNED)
+  BEGIN
+    INSERT into persona VALUES(admitido);
+  
+    UPDATE persona as p
+      SET admitido = 'SI'
+      WHERE p.peso>pesoMin;
+    UPDATE persona as p
+      SET admitido = 'NO'
+      WHERE p.peso<pesoMin;
+  END //
+  
+    CALL PROCEDURE datosPersonas(50);
 ```
   
 </div>
