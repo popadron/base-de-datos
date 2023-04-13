@@ -28,7 +28,13 @@ Teniendo en cuenta esta información se pide:
     - Fecha Última Donación. DateTime.
   
 ```sql
-  CREATE TABLE persona (peso INT UNSIGNED, admitido VARCHAR(2), sexo CHAR(1), fechaUltimaDonacion DATETIME);
+  CREATE TABLE persona (
+    id INT autoIncrement PRIMARY KEY,
+    peso INT UNSIGNED,
+    admitido VARCHAR(2),
+    sexo CHAR(1),
+    fechaUltimaDonacion DATETIME
+  );
 ```
   
 - Realiza al menos 10 insert en la tabla, con datos aleatorios, generados por el usuario.
