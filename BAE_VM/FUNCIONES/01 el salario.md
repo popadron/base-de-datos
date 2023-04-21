@@ -111,10 +111,10 @@ Cree una función para cada punto teniendo en cuenta que:
       DECLARE bono double;
       DECLARE subTransporte double;
 
-      SET salud = call salud(base);
-      SET pension = call pension(base);
-      SET bono = call bono(base);
-      SET subTransporte = call subTransporte(base);
+      SET salud = salud(base);
+      SET pension = pension(base);
+      SET bono = bono(base);
+      SET subTransporte = subTransporte(base);
 
       SET res = base - salud - pension + bono + subTransporte;
 
