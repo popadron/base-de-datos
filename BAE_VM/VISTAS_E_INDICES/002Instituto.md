@@ -62,24 +62,24 @@ inscripción).
   DELIMITER //
   CREATE PROCEDURE incercionRegistro (IN numRegistros INT, IN nInscripcion INT)
   BEGIN
+    DECLARE asigNInscripcion INT;
+    DECLARE asigAnioInscripcion INT;
     DECLARE asigNombre CHAR(15);
     DECLARE asigCodDocumento CHAR(20);
     DECLARE asigDomicilio CHAR(60);
     DECLARE asigCiudad CHAR(15);
     DECLARE asigProvincia CHAR(15);
     
+    asigAnioInscripcion = '2020';
     asigNombre = CONCAT('mella', nInscripcion);
     asigCodDocumento = CONCAT('0000', nInscripcion);
-    
     asigProvincia = 'Aveces';
  
     IF (nInscripcion/2) <> 0 then
       asigDomicilio = CONCAT('C/Dr. No Quiero', nInscripcion);
-      INSERT INTO persona VALUES(pesoEntrada, 'Si', 'H', '2012-10-15 15:45:56');
       asigCiudad = 'Larca Dorim';
     ELSE
       asigDomicilio = CONCAT('C/Dr. Si Quiero', nInscripcion);
-      INSERT INTO persona VALUES(pesoEntrada, 'Si', 'M', '2012-10-15 15:45:56');
       asigCiudad = 'Arcu Mant';
     end IF;
   END //
