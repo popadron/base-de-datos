@@ -15,33 +15,42 @@ Un instituto de enseñanza guarda los siguientes datos de sus alumnos:
  - ciudad,
  - provincia,
  - clave primaria: número de inscripto y año de inscripción.
-```sql
-  CREATE DATABASE if NOT exists alumnos;
-  CREATE TABLE alumno (
-    nInscripcion INT;
-    anioInscripción INT;
-    nombre CHAR(20);
-    apellidos CHAR(50);
-    domicilio CHAR(60);
-    ciudad CHAR(15);
-    provincia(15);
-    
-  );
-  
-```
-  
-  
+ 
 Se pide: 
 - Elimine la tabla "alumno" si existe. 
     >__Nota__:_Muestra el comando y la salida_.
+ ```sql
+  CREATE DATABASE alumnos IF NOT EXISTS;
+  DROP TABLE alumno IF EXISTS;
+ ```
 - Cree la tabla definiendo una clave primaria compuesta (año de inscripción y número de 
 inscripción).
     >__Nota__:_Muestra el comando y la salida_. 
 - Define los siguientes indices:
-   - Un índice único por el campo "documento" y un índice común por ciudad y provincia.
-        >__Nota__:_Muestra el comando y la salida. Justifica el tipo de indice en un comentario_. 
-    - Vea los índices de la tabla.
-        >__Nota__:_Muestra el comando y la salida __"show index"___.
+ ```sql
+  CREATE DATABASE alumnos IF NOT EXISTS;
+  DROP TABLE alumno IF EXISTS;
+  CREATE TABLE alumno (
+    nInscripcion INT AUTO_INCREMENT;
+    anioInscripción INT;
+    nombre CHAR(20);
+    documento CHAR(50);
+    domicilio CHAR(60);
+    ciudad CHAR(15);
+    provincia(15);
+    PRIMARY KEY(nInscripcion, anioInscripcion);
+  );
+```
+- Un índice único por el campo "documento" y un índice común por ciudad y provincia.
+    >__Nota__:_Muestra el comando y la salida. Justifica el tipo de indice en un comentario_.
+ ```sql
+  CREATE UNIQUE INDEX idxDocumento ON usuarios(documento);
+ ```
+ ```sql
+  CREATE INDEX idxCiudadProvincia ON usuarios(ciudad [,provincia]);
+ ```
+- Vea los índices de la tabla.
+    >__Nota__:_Muestra el comando y la salida __"show index"___.
 - Genera un procedimiento que realice la inserción de 5 registros, al menos 2 veces, de forma aleatoria.
     >__Nota__:_Muestra el comando y la salida_.
 - Intente ingresar un alumno con clave primaria repetida.
@@ -52,9 +61,6 @@ inscripción).
     >__Nota__:_Muestra el comando y la salida_.
 - Elimina los indices creados, y muestra que ya no se encuentran.
     >__Nota__:_Muestra el comando y la salida_.
-## Referencias
 
-- [Índices en MySql](https://dev.mysql.com/doc/refman/8.0/en/mysql-indexes.html).
-- [Apuntes](../../indices.md).
 
 </div>
